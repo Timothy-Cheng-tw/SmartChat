@@ -5,7 +5,7 @@ import { db } from "../../libs/firebase";
 import { collection, doc, onSnapshot, addDoc, serverTimestamp, orderBy, query } from "firebase/firestore";
 import { useUser } from "@/contexts/userContext";
 import { useRouter } from "next/navigation";
-import { getAuth, signOut } from "firebase/auth";
+import { getAuth, signOut, signInWithPopup, GoogleAuthProvider, getRedirectResult } from "firebase/auth";
 import { FiCopy, FiEdit } from "react-icons/fi"; // Import copy and edit icons
 import { motion, AnimatePresence } from "framer-motion"; // Import framer-motion for animations
 
@@ -122,6 +122,20 @@ const ChatPage = () => {
     }
   };
 
+  useEffect(() => {
+    const auth = getAuth();
+    getRedirectResult(auth)
+      .then((result) => {
+        if (result.user) {
+          // User signed in successfully.
+          // You can access the user information here.
+        }
+      })
+      .catch((error) => {
+        console.error("Error during sign-in with redirect:", error);
+      });
+  }, []);
+
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen bg-gray-100 text-gray-500">
@@ -212,14 +226,16 @@ const ChatPage = () => {
           {messages.map((message, index) => (
             <div
               key={index}
-              className={`flex ${message.senderId === user?.displayName ? "justify-end" : "justify-start"
-                }`}
+              className={`flex ${
+                message.senderId === user?.displayName ? "justify-end" : "justify-start"
+              }`}
             >
               <div
-                className={`p-4 rounded-xl shadow-md max-w-xs ${message.senderId === user?.displayName
+                className={`p-4 rounded-xl shadow-md max-w-xs ${
+                  message.senderId === user?.displayName
                     ? "bg-indigo-500 text-white"
                     : "bg-gray-200 text-gray-800"
-                  }`}
+                }`}
               >
                 <div className="text-sm opacity-70 mb-1">{message.senderId}</div>
                 <div>{message.text}</div>
