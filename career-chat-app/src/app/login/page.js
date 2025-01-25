@@ -28,7 +28,6 @@ const ChatPage = () => {
       const result = await signInWithPopup(auth, provider);
       const loggedInUser = result.user;
       setUser(loggedInUser); // Set the logged-in user
-console.log("loggine")
       router.push("/chat");
     } catch (error) {
       console.error("Google Sign-In Error:", error.message);

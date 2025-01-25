@@ -14,7 +14,6 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log("userContext set User: "+ currentUser)
       setUser(currentUser);
       setLoading(false); // Stop loading when the auth state is determined
     });
