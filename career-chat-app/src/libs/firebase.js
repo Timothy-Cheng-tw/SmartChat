@@ -17,6 +17,6 @@ const firebaseConfig = {
   measurementId: "G-0P7GMF37JN"
 };
 
-const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app); // 用戶認證
-export const db = getFirestore(app); // Firestore 資料庫
+const firebaseApp = initializeApp(firebaseConfig);
+export const auth = getAuth(firebaseApp); // 用戶認證
+export const db = getFirestore(firebaseApp); // Firestore 資料庫
