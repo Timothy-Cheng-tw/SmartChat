@@ -122,20 +122,6 @@ const ChatPage = () => {
     }
   };
 
-  useEffect(() => {
-    const auth = getAuth();
-    getRedirectResult(auth)
-      .then((result) => {
-        if (result.user) {
-          // User signed in successfully.
-          // You can access the user information here.
-        }
-      })
-      .catch((error) => {
-        console.error("Error during sign-in with redirect:", error);
-      });
-  }, []);
-
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen bg-gray-100 text-gray-500">
